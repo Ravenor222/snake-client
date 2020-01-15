@@ -1,7 +1,15 @@
 const net = require('net');
+const rl = require("readline");
 
 
 const connect = () => {
+const readline = rl.createInterface({
+    input: process.stdin,
+    output: process.stdout
+});
+
+
+    /////
     const conn = net.createConnection({
         host: "localhost",
         port: 50541
@@ -11,9 +19,13 @@ const connect = () => {
         console.log("Server: ", data);
 
     });
+    
     //
     conn.on("connect", () => {
-        conn.write("Name: nk");
+        readline.question("whats your 3 letter name", (name) => {
+            conn.write(`Name: ${name}`)
+        })
+        //conn.write("Name: nk");
         console.log("Successfully connected to a game server!")
         })
 
